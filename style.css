@@ -1,0 +1,538 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Afacad", Arial, Helvetica, sans-serif;
+  font-variation-settings: "wght" 400;
+  box-sizing: border-box;
+  -webkit-user-drag: none;
+  /* user-drag: none; */
+  user-select: none;
+  overflow: hidden;
+}
+
+h1 {
+  text-align: center;
+  font-size: 64px;
+  text-transform: uppercase;
+  font-variation-settings: "wght" 700;
+  margin-top: 30vh;
+}
+
+h2 {
+  font-size: 48px;
+  text-transform: uppercase;
+  font-variation-settings: "wght" 700;
+  margin-top: 30vh;
+}
+
+h3 {
+  font-variation-settings: "wght" 500;
+  font-size: 24px;
+}
+
+p {
+  font-size: 20px;
+}
+
+img.border {
+  position: absolute;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  padding: 40px;
+}
+
+/* Botões de imagens */
+.button {
+  width: 50px;
+  height: 50px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.button:not(.disabled):active {
+  transform: translateY(2px);
+}
+
+/* ==================== SPLASH SCREEN ==================== */
+div#splash_screen {
+  display: block; /* Primeiro a ser mostrado */
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d73f28;
+  color: white;
+  text-align: center;
+
+  & img.button {
+    margin-top: calc(30vh - 100px);
+  }
+}
+
+/* ==================== MAIN SCREEN ==================== */
+div#main_screen {
+  display: none;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  color: black;
+  /* padding: 20px; */
+}
+
+/* Arrasto do módulo para o canvas */
+img.preview-invalid {
+  position: absolute;
+  display: block;
+  opacity: 0.5;
+  cursor: grabbing;
+}
+img.preview-valid {
+  position: absolute;
+  display: block;
+  opacity: 1;
+  cursor: grabbing;
+}
+
+/* Tapa a conversão do canvas para imagem */
+div#cover {
+  position: absolute;
+  display: none;
+  background-color: white;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  & h2 {
+    text-align: center;
+  }
+}
+
+/* -------------------- OPTIONS -------------------- */
+div#main_screen div#options {
+  position: absolute;
+  display: block;
+  left: 0;
+  background-color: whitesmoke;
+  padding: 20px;
+  height: 100%;
+  /* remove o tamanho da grid, dividindo tudo ao meio (porque isto é só do lado esquerdo) */
+  max-width: calc((100vw - 100vh) / 2);
+  /* max-width: calc((100vw - 40px - 640px) / 2); */
+}
+
+/* Logo */
+#options > img {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 128px;
+  margin-bottom: 5vh;
+}
+
+#options div {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 0 0 8px;
+}
+
+#options div div {
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 100%;
+  cursor: pointer;
+}
+
+#options div.disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+}
+
+/* Botões fill */
+#fill div.fill-blue {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/fill-blue-default.svg");
+}
+#fill div.fill-blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/fill-blue-hover.svg");
+}
+
+#fill div.fill-red {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/fill-red-default.svg");
+}
+#fill div.fill-red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/fill-red-hover.svg");
+}
+
+#fill div.fill-cyan {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/fill-cyan-default.svg");
+}
+#fill div.fill-cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/fill-cyan-hover.svg");
+}
+
+/* Botão size-small */
+#size div.size-small.blue {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/size-small-default.svg");
+}
+#size div.size-small.blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/size-small-hover.svg");
+}
+#size div.size-small.red {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/size-small-default.svg");
+}
+#size div.size-small.red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/size-small-hover.svg");
+}
+#size div.size-small.cyan {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/size-small-default.svg");
+}
+#size div.size-small.cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/size-small-hover.svg");
+}
+
+/* Botão size-medium */
+#size div.size-medium.blue {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/size-medium-default.svg");
+}
+#size div.size-medium.blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/size-medium-hover.svg");
+}
+#size div.size-medium.red {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/size-medium-default.svg");
+}
+#size div.size-medium.red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/size-medium-hover.svg");
+}
+#size div.size-medium.cyan {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/size-medium-default.svg");
+}
+#size div.size-medium.cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/size-medium-hover.svg");
+}
+
+/* Botão size-big */
+#size div.size-big.blue {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/size-big-default.svg");
+}
+#size div.size-big.blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/size-big-hover.svg");
+}
+#size div.size-big.red {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/size-big-default.svg");
+}
+#size div.size-big.red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/size-big-hover.svg");
+}
+#size div.size-big.cyan {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/size-big-default.svg");
+}
+#size div.size-big.cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/size-big-hover.svg");
+}
+
+/* Botão turn-left */
+#rotation div.turn-left.blue {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/turn-left-default.svg");
+}
+#rotation div.turn-left.blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/turn-left-hover.svg");
+}
+#rotation div.turn-left.red {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/turn-left-default.svg");
+}
+#rotation div.turn-left.red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/turn-left-hover.svg");
+}
+#rotation div.turn-left.cyan {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/turn-left-default.svg");
+}
+#rotation div.turn-left.cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/turn-left-hover.svg");
+}
+
+/* Botão turn-right */
+#rotation div.turn-right.blue {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/turn-right-default.svg");
+}
+#rotation div.turn-right.blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/turn-right-hover.svg");
+}
+#rotation div.turn-right.red {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/turn-right-default.svg");
+}
+#rotation div.turn-right.red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/turn-right-hover.svg");
+}
+#rotation div.turn-right.cyan {
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/turn-right-default.svg");
+}
+#rotation div.turn-right.cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/turn-right-hover.svg");
+}
+
+/* Botão delete */
+#delete div.delete.blue {
+  margin-top: 5vh;
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/blue/delete-default.svg");
+}
+#delete div.delete.blue:not(.disabled):hover {
+  background-image: url("./assets/icons/blue/delete-hover.svg");
+}
+#delete div.delete.red {
+  margin-top: 5vh;
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/red/delete-default.svg");
+}
+#delete div.delete.red:not(.disabled):hover {
+  background-image: url("./assets/icons/red/delete-hover.svg");
+}
+#delete div.delete.cyan {
+  margin-top: 5vh;
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/cyan/delete-default.svg");
+}
+#delete div.delete.cyan:not(.disabled):hover {
+  background-image: url("./assets/icons/cyan/delete-hover.svg");
+}
+
+/* Botão enviar */
+#options div.send {
+  position: absolute;
+  bottom: 5vh;
+  width: 100%;
+  height: 20vh;
+  max-width: 96px;
+  max-height: 66px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/send-default.svg");
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+#options div.send:not(.disabled):hover {
+  background-image: url("./assets/icons/send-hover.svg");
+}
+
+/* -------------------- CANVAS -------------------- */
+div#main_screen div#canvas {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px black dashed;
+  height: calc(100vh - 40px);
+  width: calc(100vh - 40px);
+  max-height: 640px;
+  max-width: 640px;
+
+  & > table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    & td {
+      border: 1px lightgray dotted;
+      overflow: visible;
+    }
+  }
+
+  & img {
+    cursor: pointer;
+  }
+}
+
+img.selected {
+  border: 2px #d73f28 dashed;
+}
+
+/* -------------------- MODULES -------------------- */
+
+div#main_screen div#modules {
+  position: absolute;
+  display: block;
+  overflow-y: auto;
+  right: 0;
+  padding: 35px 20px 20px;
+  background-color: whitesmoke;
+  height: 100%;
+  width: 128px;
+
+  & img {
+    position: relative;
+    display: block;
+    margin: 0 auto 20px auto;
+    background-color: white;
+    width: 100%;
+    height: auto;
+    max-width: 48px;
+    cursor: grab;
+  }
+}
+
+/* ==================== SAVE SCREEN ==================== */
+div#save_screen {
+  display: none;
+  position: relative;
+  padding: 40px 80px;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  color: black;
+  /* text-align: center; */
+}
+
+/* Botão fechar */
+div#save_screen div#close {
+  position: absolute;
+  display: block;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("./assets/icons/close-default.svg");
+}
+div#save_screen div#close:hover {
+  background-image: url("./assets/icons/close-hover.svg");
+}
+
+/* Primeira secção */
+div#save_screen section:first-of-type {
+  width: 100%;
+  max-width: 900px;
+  margin-top: calc(20vh - 120px);
+
+  & img {
+    float: left;
+    margin-right: 40px;
+    width: 300px;
+    height: 300px;
+  }
+}
+div#save_screen h2 {
+  color: #d73f28;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+div#save_screen section:first-of-type h3 {
+  color: #082a59;
+  margin-top: 20px;
+}
+
+/* Segunda secção */
+div#save_screen section:nth-of-type(2) {
+  width: 100%;
+  margin-top: calc(30vh - 175px);
+  text-align: center;
+}
+
+div#save_screen section:nth-of-type(2) h3 {
+  color: #d73f28;
+  margin: 20px 0;
+}
+
+#form_email input,
+#form_email input:focus {
+  font-size: 24px;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 800px;
+  border: #7dc3ea 5px solid;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+
+  &::placeholder {
+    font-style: italic;
+  }
+
+  &::selection {
+    background-color: #7dc3ea;
+  }
+}
+
+#form_email p {
+  font-size: 15px;
+  color: #082a59;
+  margin: 10px 0;
+}
+
+#form_email input:invalid ~ button[type="submit"] {
+  opacity: 50%;
+  pointer-events: painted;
+  cursor: not-allowed;
+}
+
+#form_email input:invalid ~ button[type="submit"] {
+  opacity: 50%;
+  pointer-events: painted;
+  cursor: not-allowed;
+}
+
+#form_email button[type="submit"] {
+  width: 96px;
+  height: 66px;
+  cursor: pointer;
+  background: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("./assets/icons/send-default.svg");
+  border: none;
+  outline: none;
+  opacity: 100%;
+}
+#form_email input:valid ~ button[type="submit"]:hover {
+  background-image: url("./assets/icons/send-hover.svg");
+}
+
+/* ==================== THANK YOU SCREEN ==================== */
+div#thank_screen {
+  display: none;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #082a59;
+  color: white;
+  text-align: center;
+}
+
+div#thank_screen img:not(.border) {
+  width: 150px;
+  margin-top: calc(30vh - 150px);
+  filter: brightness(1000);
+}

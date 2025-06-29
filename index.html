@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lar Doce Lar | Como é a tua casa ideal?</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- SPLASH SCREEN -->
+    <div id="splash_screen">
+        <h1>Como é a tua casa ideal?</h1>
+        <img class="button" onclick="goToMain()" src="./assets/icons/start.svg" alt="Começar">
+        <img class="border" src="./assets/border.png" alt="">
+    </div>
+
+
+
+    <!-- MAIN SCREEN -->
+    <div id="main_screen">
+        <div id="cover">
+            <h2>A enviar...</h2>
+        </div>
+
+        <!-- ECRÃ DAS OPÇÕES -->
+        <div id="options">
+            <img src="./assets/logo.svg" alt="Logo">
+
+            <!-- Cores de Preenchimento -->
+            <div id="fill">
+                <div class="button fill-blue" onclick="ChangeColor('blue')" title="Cor azul"></div>
+                <div class="button fill-red" onclick="ChangeColor('red')" title="Cor vermelha"></div>
+                <div class="button fill-cyan" onclick="ChangeColor('cyan')" title="Cor ciano"></div>
+            </div>
+
+            <!-- Tamanhos do módulo -->
+            <div id="size">
+                <div class="button size-small red" onclick="ChangeSize(1)" title="Tamanho pequeno [1]"></div>
+                <div class="button size-medium red" onclick="ChangeSize(2)" title="Tamanho médio [2]"></div>
+                <div class="button size-big red" onclick="ChangeSize(3)" title="Tamanho grande [3]"></div>
+            </div>
+
+            <!-- Rotação do módulo -->
+            <div id="rotation">
+                <div class="button turn-left red" onclick="Rotate(-90)" title="Rodar para a esquerda"></div>
+                <div class="button turn-right red" onclick="Rotate(+90)" title="Rodar para a direita"></div>
+            </div>
+
+            <!-- Apagar módulo -->
+            <div id="delete">
+                <div class="button delete red" onclick="Delete()" title="Apagar [Delete, Backspace]"></div>
+            </div>
+
+            <!-- Botão enviar -->
+            <div class="button send disabled" onclick="goToSave()" title="Enviar para o e-mail"></div>
+        </div>
+
+        <!-- CANVAS / TELA PRINCIPAL -->
+        <div id="canvas">
+            <!-- Aqui irão estar inseridos os objetos que são adicionados à tela -->
+        </div>
+
+        <!-- LISTA DE MÓDULOS -->
+        <div id="modules">
+            <!-- Ok, aqui as imagens idealmente têm de ser <svg>, mas têm de estar na tag <img> -->
+            <img class="blue" src="./assets/modules/blue/mod1.svg" alt="Módulo 1">
+            <img class="red" src="./assets/modules/red/mod2.svg" alt="Módulo 2">
+            <img class="cyan" src="./assets/modules/cyan/mod3.svg" alt="Módulo 3">
+            <img class="blue" src="./assets/modules/blue/mod4.svg" alt="Módulo 4">
+            <img class="red" src="./assets/modules/red/mod5.svg" alt="Módulo 5">
+            <img class="cyan" src="./assets/modules/cyan/mod6.svg" alt="Módulo 6">
+            <img class="blue" src="./assets/modules/blue/mod7.svg" alt="Módulo 7">
+            <img class="red" src="./assets/modules/red/mod8.svg" alt="Módulo 8">
+            <img class="cyan" src="./assets/modules/cyan/mod9.svg" alt="Módulo 9">
+            <img class="blue" src="./assets/modules/blue/mod10.svg" alt="Módulo 10">
+            <img class="red" src="./assets/modules/red/mod11.svg" alt="Módulo 11">
+            <img class="cyan" src="./assets/modules/cyan/mod12.svg" alt="Módulo 12">
+            <img class="blue" src="./assets/modules/blue/mod13.svg" alt="Módulo 13">
+            <img class="red" src="./assets/modules/red/mod14.svg" alt="Módulo 14">
+            <img class="cyan" src="./assets/modules/cyan/mod15.svg" alt="Módulo 15">
+            <img class="blue" src="./assets/modules/blue/mod16.svg" alt="Módulo 16">
+            <img class="red" src="./assets/modules/red/mod17.svg" alt="Módulo 17">
+            <img class="cyan" src="./assets/modules/cyan/mod18.svg" alt="Módulo 18">
+            <img class="blue" src="./assets/modules/blue/mod19.svg" alt="Módulo 19">
+            <img class="red" src="./assets/modules/red/mod20.svg" alt="Módulo 20">
+            <img class="cyan" src="./assets/modules/cyan/mod21.svg" alt="Módulo 21">
+        </div>
+    </div>
+
+
+
+    <!-- SAVE SCREEN -->
+    <div id="save_screen">
+        <!-- Info sobre HH -->
+        <div id="close" class="button" title="Regressar ao ecrã inicial" onclick="goToMain()"></div>
+        <section>
+            <img src="./assets/HH.png" alt="Habitação Hoje!">
+            <h2>Habitação, Hoje!</h2>
+            <p>Habitação, Hoje! A Habitação Hoje (HH) é uma organização política, apartidária, que nasce no Porto em
+                2021, como o espaço de construção da luta pela conquista popular do direito à habitação e à cidade.
+            </p>
+            <h3>Junta-te a esta luta, faz-te associado e aparece nas Assembleias de Moradores!</h3>
+        </section>
+        <section>
+            <h3>Junta-te e recebe a tua casa de sonho!</h3>
+            <form id="form_email">
+                <input type="email" required placeholder="exemplo@gmail.com">
+                <p>Se não der o email, não recebe o desenho feito</p>
+                <div class="button send disabled" onclick="goToSave()" title="Enviar para o e-mail"></div>
+
+                <button type="submit" title="Enviar e-mail"></button>
+            </form>
+        </section>
+    </div>
+    <!-- THANK YOU SCREEN -->
+    <div id="thank_screen">
+        <h1>Obrigada &lt;3</h1>
+        <img src="./assets/logo.svg" alt="Logo">
+        <img class="border" src="./assets/border.png" alt="">
+    </div>
+
+    <!-- HTML-TO-IMAGE (para exportar a imagem) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <!-- JAVASCRIPT PRINCIPAL -->
+    <script src="app.js"></script>
+</body>
+
+</html>
